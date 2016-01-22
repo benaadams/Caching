@@ -11,13 +11,21 @@ namespace Microsoft.Extensions.Caching.SqlConfig
 {
     public class Program
     {
+        public static int Main(string[] args)
+        {
+            return new SqlCache().Main(args);
+        }
+    }
+
+    public class SqlCache
+    {
         private string _connectionString = null;
         private string _schemaName = null;
         private string _tableName = null;
 
         private readonly ILogger _logger;
 
-        public Program()
+        public SqlCache()
         {
             var loggerFactory = new LoggerFactory();
             loggerFactory.AddConsole();
@@ -32,7 +40,7 @@ namespace Microsoft.Extensions.Caching.SqlConfig
                     "to be used for distributed caching";
 
                 var app = new CommandLineApplication();
-                app.Name = "sqlservercache";
+                app.Name = "dotnet-sql-cache";
                 app.Description = description;
 
                 app.HelpOption("-?|-h|--help");
